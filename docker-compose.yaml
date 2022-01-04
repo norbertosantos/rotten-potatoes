@@ -1,0 +1,38 @@
+version: "3.8"
+
+networks:
+  rotten-potatoes-net:
+    driver: bridge
+
+services:
+  rotten-potatoes:
+    image: norbertosantos/rotten-potatoes:v1
+    ports:
+      - 5000:5000
+    networks:
+      - rotten-potatoes-net
+    depends_on:
+      - mongo_db
+    environment:
+      #MONGODB_URI: mongodb://mongouser:mongopwd:27017/admin
+      MONGODB_DB: admin
+      MONGODB_HOST: mongo_db
+      MONGODB_PORT: 27017
+      MONGODB_USERNAME: mongouser
+      MONGODB_PASSWORD: mongopwd
+  
+  mongo_db:
+    image: norbertosantos/mongodb:4.4.3
+    ports:
+      - 27017:27017
+    networks:
+      - rotten-potatoes-net
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
+    volumes:
+      - mongo_vol:/data/db 
+
+volumes: 
+  mongo_vol:
+    external: true
