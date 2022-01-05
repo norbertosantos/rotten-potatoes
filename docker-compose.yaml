@@ -22,7 +22,8 @@ services:
       MONGODB_PASSWORD: mongopwd
   
   mongo_db:
-    image: norbertosantos/mongodb:4.4.3
+    image: mongo:4.4.3
+    restart: always
     ports:
       - 27017:27017
     networks:
@@ -31,8 +32,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongouser
       MONGO_INITDB_ROOT_PASSWORD: mongopwd
     volumes:
-      - mongo_vol:/data/db 
+      - mongo_rotten_potatoes_vol:/data/db 
 
 volumes: 
-  mongo_vol:
-    external: true
+  mongo_rotten_potatoes_vol:
