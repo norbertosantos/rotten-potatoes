@@ -14,7 +14,6 @@ services:
     depends_on:
       - mongo_db
     environment:
-      #MONGODB_URI: mongodb://mongouser:mongopwd:27017/admin
       MONGODB_DB: admin
       MONGODB_HOST: mongo_db
       MONGODB_PORT: 27017
